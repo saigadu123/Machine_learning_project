@@ -2,9 +2,9 @@
 This is my first machine learning project
 
 create conda environment
-----
+'''
 conda create -p venv python==3.7 -y
------------------------------------
+'''
 Activate conda environment
 ----
 conda activate venv/
@@ -14,7 +14,7 @@ Create requirements file
 pip install -r requirements.txt
 ------------------------------------
 Git commands
-------
+
 git add <filename> --> To add files to git
 git add . ---> To add all files into git
 git status --> TO check all version maintained by Git
