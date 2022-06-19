@@ -1,0 +1,36 @@
+Entities in ML project
+
+1. Data Ingestion
+   Split dataset for train and test
+
+2. Data Validation
+    Data Range
+    Imbalanced Dataset
+    Outliers
+    Duplicate data
+    Schema Validation
+    Null Check
+    Domain value
+    Anomalies
+    Data Drift =>When stats of old dataset is no longer align with new dataset
+
+3. Perform EDA to understand Data(Jupyter notebook)
+    Model selection(Jupyter notebook)
+    Hyperparameter Tuning(Jupyter notebook)
+
+4. Data Transformation
+
+5. Model Training
+
+6. Model Evaluation
+    Test Dataset for model Evaluation
+
+7. Push Model.
+
+---->Data is splitted into Training, Validation and Testing Dataset
+
+Serialization -- > saving an object into the file is called Serialization
+Deserialization -->Loading an object from file is called Deserialization
+
+    
+    

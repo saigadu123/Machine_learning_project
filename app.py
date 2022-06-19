@@ -8,7 +8,7 @@ app = Flask(__name__)
 @app.route('/',methods=['POST','GET'])
 def index():
     try:
-        raise Exception("We are testing custom Exception")
+        raise Exception("We are raising custom Exception")
     except Exception as e:
         housing = HousingException(e,sys)
         logging.info(housing.error_message)
