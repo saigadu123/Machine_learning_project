@@ -5,7 +5,7 @@ from typing import List
 
 # Declaring Variables for a setup function
 PROJECT_NAME = "housing-predictor"
-VERSION = "0.0.1"
+VERSION = "0.0.3"
 AUTHOR = "sai krishna"
 DESCRIPTION = "This is a first FSDS Machine learning project"
 
