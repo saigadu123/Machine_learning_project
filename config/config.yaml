@@ -18,6 +18,7 @@ data_validation_config:
   schema_file_name: schema.yaml
   report_file_name : report.json
   report_page_file_name: report.html
+  profile_file_name: details.json
 
 data_transformation_config:
   add_bedroom_per_room: true

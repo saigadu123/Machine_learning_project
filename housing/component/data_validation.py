@@ -56,10 +56,22 @@ class DataValidation:
     def validate_dataset_schema(self)->bool:
         try:
             validation_status = False
-
-
+            train_df,test_df = self.get_train_test_df()
+            profile_dict = dict()
+            logging.info(f"Checking number of columns")
+            no_of_columns = len(train_df.columns)
+            profile_dict["Number_of_columns"] = no_of_columns 
+            
+            list_of_names  = list(train_df.columns)
+            profile_dict["Column_names"] = list_of_names 
+            profile_file_path = self.data_validation_config.profile_file_path
+            profile_report_dir = os.path.dirname(profile_file_path)
+            os.makedirs(profile_report_dir,exist_ok=True)
+            with open(profile_file_path,"w") as profile_file:
+                json.dump(profile_dict,profile_file)
+            
             validation_status = True
-            return validation_status
+            return profile_file_path
         except Exception as e:
             raise HousingException(e,sys) from e 
 
@@ -98,6 +110,7 @@ class DataValidation:
         try:
             report = self.get_and_save_data_drift_report()
             self.save_data_drift_report_page()
+            profile_report = self.validate_dataset_schema()
             return True
         except Exception as e:
             raise HousingException(e,sys) from e 
@@ -111,6 +124,7 @@ class DataValidation:
             
             data_validation_artifact = DataValidationArtifact(
                 schema_file_path = self.data_validation_config.schema_file_path,
+                profile_path = self.data_validation_config.profile_file_path,
                 report_file_path = self.data_validation_config.report_file_path,
                 report_page_file_path = self.data_validation_config.report_page_file_path,
                 is_validated = True,
