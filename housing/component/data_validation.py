@@ -68,7 +68,7 @@ class DataValidation:
             profile_report_dir = os.path.dirname(profile_file_path)
             os.makedirs(profile_report_dir,exist_ok=True)
             with open(profile_file_path,"w") as profile_file:
-                json.dump(profile_dict,profile_file)
+                json.dump(profile_dict,profile_file,indent=6)
             
             validation_status = True
             return profile_file_path
@@ -83,11 +83,11 @@ class DataValidation:
             report = json.loads(profile.json())
             report_file_path = self.data_validation_config.report_file_path
             report_dir = os.path.dirname(report_file_path)
-            os.makedirs(report_dir,exist_ok=True)
+            #os.makedirs(report_dir,exist_ok=True)
 
-            with open(report_file_path,"w") as report_file:
+            with open(report_dir,"w") as report_file:
                 json.dump(report,report_file,indent=6)
-            return report 
+            return report_dir
 
         except Exception as e:
             raise HousingException(e,sys) from e
