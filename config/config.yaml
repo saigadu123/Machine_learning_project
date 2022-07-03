@@ -21,7 +21,7 @@ data_validation_config:
   profile_file_name: details.json
 
 data_transformation_config:
-  add_bedroom_per_room: true
+  add_bedroom_per_room: True
   transformed_dir: transformed_data
   transformed_train_dir: train
   transformed_test_dir: test
