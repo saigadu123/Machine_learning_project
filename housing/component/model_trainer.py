@@ -5,7 +5,7 @@ from typing import List
 from housing.entity.artifact_entity import DataTransformationArtifact,ModelTrainerArtifact
 from housing.entity.config_entity import ModelTrainerConfig
 from housing.util.util import load_numpy_array_data,load_object,save_object
-from housing.entity.model_factory import MetricInfoArtifact,ModelFactory,GridSearchBestModel
+from housing.entity.model_factory import MetricInfoArtifact,ModelFactory,GridSearchedBestModel
 from housing.entity.model_factory import evaluate_regression_model
 
 class HousingEstimatorModel:
@@ -71,7 +71,7 @@ class ModelTrainer:
 
             logging.info(f"Best model found on training dataset: {best_model}")
             logging.info(f"Extracting trained model list.")
-            grid_searched_best_model_list:List[GridSearchBestModel] = model_factory.grid_searched_best_model_list
+            grid_searched_best_model_list:List[GridSearchedBestModel] = model_factory.grid_searched_best_model_list
 
             model_list = [model.best_model for model in grid_searched_best_model_list]
             logging.info(f"Evaluation all trained model on training and testing dataset both")

@@ -297,7 +297,7 @@ class ModelFactory:
     def get_best_model(self,x,y,base_accuracy=0.6)->BestModel:
         try:
             logging.info(f"started Initializing model from config file")
-            initialized_model_list = self.initialized_model_list()
+            initialized_model_list = self.get_initialized_model_list()
             logging.info(f"Initialized model: {initialized_model_list}")
             grid_searched_best_model_list = self.initiate_best_parameter_search_for_initialized_models(
                 initialized_model_list = initialized_model_list,
