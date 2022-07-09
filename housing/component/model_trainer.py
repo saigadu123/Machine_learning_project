@@ -71,8 +71,42 @@ class ModelTrainer:
 
             logging.info(f"Best model found on training dataset: {best_model}")
             logging.info(f"Extracting trained model list.")
-            
+            grid_searched_best_model_list:List[GridSearchBestModel] = model_factory.grid_searched_best_model_list
+
+            model_list = [model.best_model for model in grid_searched_best_model_list]
+            logging.info(f"Evaluation all trained model on training and testing dataset both")
+            metric_info:MetricInfoArtifact = evaluate_regression_model(model_list=model_list,x_train=x_train,y_train=y_train,x_test=x_test,y_test=y_test,base_accuracy=base_accuracy)
+
+            logging.info(f"Best found model on both training and testing dataset.")
+
+            preprocessing_object = load_object(file_path=self.data_transformation_artifact.preprocessed_object_file_path)
+            model_obj = metric_info.model_object
+
+            trained_model_file_path = self.model_trainer_config.trained_model_file_path
+            housing_model = HousingEstimatorModel(preprocessing_object=preprocessing_object,trained_model_object=model_obj)
+            logging.info(f"Saving model at path: {trained_model_file_path}")
+            save_object(file_path=trained_model_file_path,obj=housing_model)
+
+            model_trainer_artifact = ModelTrainerArtifact(is_trained=True,
+                                                          message = "Model Trained Successfully",
+                                                          trained_model_file_path = trained_model_file_path,
+                                                          train_rmse = metric_info.train_rmse,
+                                                          test_rmse = metric_info.test_rmse,
+                                                          train_accuracy = metric_info.train_accuracy,
+                                                          test_accuracy = metric_info.test_accuracy,
+                                                          model_accuracy=metric_info.model_accuracy)
+            logging.info(f"Model Trainer Artifact: {model_trainer_artifact}")
+            return model_trainer_artifact 
         except Exception as e:
             raise HousingException(e,sys) from e
+
+#loading transformed training and testing datset
+#reading model config file 
+#getting best model on training datset
+#evaludation models on both training & testing datset -->model object
+#loading preprocessing pbject
+#custom model object by combining both preprocessing obj and model obj
+#saving custom model object
+#return model_trainer_artifact
 
     
