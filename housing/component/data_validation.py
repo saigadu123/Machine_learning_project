@@ -24,14 +24,14 @@ class DataValidation:
         try:
             train_df = pd.read_csv(self.data_ingestion_artifact.train_file_path)
             test_df = pd.read_csv(self.data_ingestion_artifact.test_file_path)
-            logging.info(f"Training [{train_df}]and Testing [{test_df}] Dataframes collected from Ingestion Artifact")
+            #logging.info(f"Training [{train_df}]and Testing [{test_df}] Dataframes collected from Ingestion Artifact")
             return train_df,test_df
         except Exception as e:
             raise HousingException(e,sys)
     
     def is_train_and_test_file_exists(self)->bool:
         try:
-            logging.info(f"{'='*20} Data Validation Log started.{'='*20}")
+            logging.info(f"{'='*20} Data Validation Log started.{'='*60} \n \n")
             logging.info("Checking if training and testing file exists or not")
 
             train_file_path = self.data_ingestion_artifact.train_file_path
@@ -134,6 +134,8 @@ class DataValidation:
             return data_validation_artifact
         except Exception as e:
             raise HousingException(e,sys) from e
-
+    
+    def __del__(self):
+        logging.info(f"{'='*20} Data Validation Log completed.{'='*60} \n \n")
 
 

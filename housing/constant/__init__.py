@@ -1,5 +1,11 @@
 import os
 from datetime import datetime
+
+from housing.logger import CURRENT_TIME_STAMP
+
+def get_current_time_stamp():
+    return f"{datetime.now().strftime('%Y-%m-%d-%H-%M-%S')}"
+
 ROOT_DIR = os.getcwd() # To get current working Directory
 
 CONFIG_DIR = "config"
@@ -8,7 +14,7 @@ CONFIG_FILE_NAME = "config.yaml"
 
 CONFIG_FILE_PATH = os.path.join(ROOT_DIR,CONFIG_DIR,CONFIG_FILE_NAME)
 
-CURRENT_TIME_STAMP = f"{datetime.now().strftime('%Y-%m-%d-%H-%M-%S')}"
+CURRENT_TIME_STAMP = get_current_time_stamp()
 
 
 
@@ -58,3 +64,13 @@ CATEGORICAL_COLUMN_KEY = "categorical_columns"
 
 
 TARGET_COLUMN_KEY="target_column"
+
+# Model Training related variables
+
+MODEL_TRAINER_ARTIFACT_DIR = "model_trainer"
+MODEL_TRAINER_CONFIG_KEY = "model_trainer_config"
+MODEL_TRAINER_TRAINED_MODEL_DIR_KEY = "trained_model_dir"
+MODEL_TRAINER_TRAINED_MODEL_FILE_NAME_KEY = "model_file_name"
+MODEL_TRAINER_BASE_ACCURACY_KEY = "base_accuracy"
+MODEL_TRAINER_MODEL_CONFIG_DIR_KEY = "model_config_dir"
+MODEL_TRAINER_MODEL_CONFIG_FILE_NAME_KEY = "model_config_file_name"

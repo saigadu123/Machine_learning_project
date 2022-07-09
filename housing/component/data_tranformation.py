@@ -77,7 +77,7 @@ class DataTransformation:
                  data_ingestion_artifact:DataIngestionArtifact): 
 
         try:
-            logging.info(f"{'='*20} Data Transformation Log started.{'='*20}")
+            logging.info(f"{'='*20} Data Transformation Log started.{'='*60} \n \n")
             self.data_transformation_config = data_transformation_config
             self.data_ingestion_artifact = data_ingestion_artifact
             self.data_validation_artifact = data_validation_artifact
@@ -182,4 +182,4 @@ class DataTransformation:
             raise HousingException(e,sys) from e
     
     def __del__(self):
-        logging.info(f"{'='*20} Data Transformation log Completed.{'='*20}")
+        logging.info(f"{'='*20} Data Transformation log Completed.{'='*60} \n \n")
