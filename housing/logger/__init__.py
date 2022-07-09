@@ -8,7 +8,7 @@ LOG_DIR="logs"
 def get_log_file_name():
     return f"log_{get_current_time_stamp()}.log"
 
-CURRENT_TIME_STAMP=  f"{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}"
+
 
 LOG_FILE_NAME = get_log_file_name()
 

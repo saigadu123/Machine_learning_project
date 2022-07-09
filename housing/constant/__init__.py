@@ -1,7 +1,7 @@
 import os
 from datetime import datetime
 
-from housing.logger import CURRENT_TIME_STAMP
+
 
 def get_current_time_stamp():
     return f"{datetime.now().strftime('%Y-%m-%d-%H-%M-%S')}"
