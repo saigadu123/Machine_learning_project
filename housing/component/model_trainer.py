@@ -67,6 +67,10 @@ class ModelTrainer:
             logging.info(f"Expected Accuracy: {base_accuracy}")
 
             logging.info(f"Initating operation model selection")
+            best_model = model_factory.get_best_model(x=x_train,y=y_train,base_accuracy=base_accuracy)
+
+            logging.info(f"Best model found on training dataset: {best_model}")
+            logging.info(f"Extracting trained model list.")
             
         except Exception as e:
             raise HousingException(e,sys) from e
