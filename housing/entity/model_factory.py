@@ -178,7 +178,7 @@ class ModelFactory:
         try:
             best_model = None 
             for grid_searched_best_model in grid_searched_best_model_list:
-                if base_accuracy<grid_searched_best_model.best_score
+                if base_accuracy<grid_searched_best_model.best_score:
                     logging.info(f"Acceptable model found:{grid_searched_best_model}")
                     base_accuracy = grid_searched_best_model.best_score 
                     best_model = grid_searched_best_model
