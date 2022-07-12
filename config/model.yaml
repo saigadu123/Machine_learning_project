@@ -27,12 +27,5 @@ model_selection:
       - 5
       - 6
 
-  module_2:
-    class: DecisionTreeRegressor
-    module: sklearn.tree
-    params:
-      min_samples_leaf: 5
-    search_param_grid:
-      min_samples_leaf:
-      - 4
+  
 
