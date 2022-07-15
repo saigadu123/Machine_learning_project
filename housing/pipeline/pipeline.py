@@ -15,11 +15,26 @@ from housing.entity.artifact_entity import ModelEvaluationArtifact
 from housing.entity.artifact_entity import ModelPusherArtifact
 from housing.component.model_pusher import ModelPusher 
 import os,sys
+from datetime import datetime 
+import pandas as pd
+from housing.constant import EXPERIMENT_DIR_NAME,EXPERIMENT_FILE_NAME
+from threading import Thread
+from collections import namedtuple
 
-class Pipeline:
 
-    def __init__(self,config:Configuartion = Configuartion())->None:
+Experiment = namedtuple("Experiment", ["experiment_id", "initialization_timestamp", "artifact_time_stamp",
+                                       "running_status", "start_time", "stop_time", "execution_time", "message",
+                                       "experiment_file_path", "accuracy", "is_model_accepted"])
+
+class Pipeline(Thread):
+    experiment:Experiment = Experiment(*([None]*11))
+    experiment_file_path = None 
+    
+    def __init__(self,config:Configuartion)->None:
         try:
+            os.makedirs(config.training_pipeline_config.artifact_dir,exist_ok=True)
+            Pipeline.experiment_file_path = os.path.join(config.training_pipeline_config.artifact_dir,EXPERIMENT_DIR_NAME,EXPERIMENT_FILE_NAME)
+            super().__init__(daemon=False,name="pipeline")
             self.config = config
         except Exception as e:
             raise HousingException(e,sys) from e
@@ -76,6 +91,12 @@ class Pipeline:
 
     def run_pipeline(self):
         try:
+            if Pipeline.experiment.running_status:
+                logging.info("Pipeline is already running")
+                return Pipeline.experiment 
+            
+            logging.info("Pipeline Started")
+            
             data_ingestion_artifact =  self.start_data_ingestion()
             data_validation_artifact = self.start_data_validation(data_ingestion_artifact=data_ingestion_artifact)
             data_transformation_artifact = self.start_data_transformation(data_ingestion_artifact=data_ingestion_artifact,data_validation_artifact=data_validation_artifact)
@@ -84,7 +105,18 @@ class Pipeline:
                                                                     data_validation_artifact = data_validation_artifact,
                                                                     model_trainer_artifact = model_trainer_artifact) 
 
-            model_pusher_artifact = self.start_model_pusher(model_evaluation_artifact = model_evaluation_artifact)
+            if model_evaluation_artifact.is_model_accepted:
+                model_pusher_artifact = self.start_model_pusher(model_eval_artifact=model_evaluation_artifact)
+                logging.info(f'Model pusher artifact: {model_pusher_artifact}')
+            else:
+                logging.info(f"Trained Model Rejected")
+            logging.info("Pipeline Completed")
+
+            stop_time = datetime.now()
+            
+
+
+
         except Exception as e:
             raise HousingException(e,sys) from e 
 
