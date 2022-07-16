@@ -21,7 +21,7 @@ from housing.constant import EXPERIMENT_DIR_NAME,EXPERIMENT_FILE_NAME
 from threading import Thread
 from collections import namedtuple
 import uuid 
-
+import numpy as np
 
 Experiment = namedtuple("Experiment", ["experiment_id", "initialization_timestamp", "artifact_time_stamp",
                                        "running_status", "start_time", "stop_time", "execution_time", "message",
@@ -104,12 +104,12 @@ class Pipeline(Thread):
                                             artifact_time_stamp=self.config.time_stamp,
                                             running_status=True,
                                             start_time = datetime.now(),
-                                            stop_time = None,
-                                            execution_time = None,
+                                            stop_time = np.nan,
+                                            execution_time = np.nan,
                                             experiment_file_path=Pipeline.experiment_file_path,
-                                            is_model_accepted = None,
+                                            is_model_accepted = np.nan,
                                             message = "Pipeline has been started",
-                                            accuracy = None
+                                            accuracy = np.nan
                                             )
             logging.info(f"Pipeline experiment: {Pipeline.experiment}")
             self.save_experiment()
@@ -184,7 +184,7 @@ class Pipeline(Thread):
             if os.path.exists(Pipeline.experiment_file_path):
                 df = pd.read_csv(Pipeline.experiment_file_path)
                 limit = -1*int(limit)
-                return df[limit:].drop(columns=["experiment_file_path","initialization_timestamp"],axis=1)
+                return df[limit:]
             else:
                 return pd.DataFrame()
         except Exception as e:
