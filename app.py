@@ -128,7 +128,7 @@ def predict():
             HOUSING_DATA_KEY: housing_data.get_housing_data_as_dict(),
             MEDIAN_HOUSING_VALUE_KEY: median_housing_value,
         }    
-        return render_template('predict.html',context=context)
+        
     return render_template('predict.html',context=context)
 
 
