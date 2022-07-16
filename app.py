@@ -94,7 +94,7 @@ def train():
     else:
         message = "Training is already in progress."
     context = {
-        "experiment": Pipeline.get_experiments_status().to_html(classes='table table-striped col-12'),
+        "experiment": pipeline.get_experiments_status().to_html(classes='table table-striped col-12'),
         "message": message
     }
     return render_template('train.html', context=context)
