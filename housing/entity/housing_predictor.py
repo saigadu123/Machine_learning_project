@@ -18,7 +18,7 @@ class HousingData:
                 households:float,
                 median_income:float,
                 ocean_proximity:str,
-                median_house_value:None):
+                median_house_value:float = None):
         try:
             self.longitude = longitude
             self.latitude = latitude

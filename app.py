@@ -119,15 +119,15 @@ def predict():
         ocean_proximity = request.form['ocean_proximity']
 
         housing_data = HousingData(longitude=longitude,
-                                   latitude=latitude,
-                                   housing_median_age=housing_median_age,
-                                   total_rooms=total_rooms,
-                                   total_bedrooms=total_bedrooms,
-                                   population=population,
-                                   households=households,
-                                   median_income=median_income,
-                                   ocean_proximity=ocean_proximity,
-                                   )
+                                latitude=latitude,
+                                housing_median_age=housing_median_age,
+                                total_rooms=total_rooms,
+                                total_bedrooms=total_bedrooms,
+                                population=population,
+                                households=households,
+                                median_income=median_income,
+                                ocean_proximity=ocean_proximity,
+                                )
         housing_df = housing_data.get_housing_input_data_frame()
         housing_predictor = HousingPredictor(model_dir=MODEL_DIR)
         median_housing_value = housing_predictor.predict(X=housing_df)
