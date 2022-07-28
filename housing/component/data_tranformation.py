@@ -24,10 +24,10 @@ COLUMN_TOTAL_BEDROOM = "total_bedrooms"
 class FeatureGenerator(BaseEstimator,TransformerMixin):
 
     def __init__(self,add_bedrooms_per_room=True,
-                 total_rooms_ix=3,
-                 population_ix=5,
-                 households_ix=6,
-                 total_bedrooms_ix=4,columns=None):
+                total_rooms_ix=3,
+                population_ix=5,
+                households_ix=6,
+                total_bedrooms_ix=4,columns=None):
         """
         FeatureGenerator Initialization
         add_bedrooms_per_room: bool
@@ -73,8 +73,8 @@ class FeatureGenerator(BaseEstimator,TransformerMixin):
 class DataTransformation: 
 
     def __init__(self,data_transformation_config:DataTransformationConfig,
-                 data_validation_artifact:DataValidationArtifact,
-                 data_ingestion_artifact:DataIngestionArtifact): 
+                data_validation_artifact:DataValidationArtifact,
+                data_ingestion_artifact:DataIngestionArtifact): 
 
         try:
             logging.info(f"{'='*20} Data Transformation Log started.{'='*60} \n \n")

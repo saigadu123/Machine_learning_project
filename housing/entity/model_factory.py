@@ -65,7 +65,7 @@ def evaluate_regression_model(model_list:list,x_train:np.ndarray,y_train:np.ndar
             test_rmse = np.sqrt(mean_squared_error(y_test,y_test_pred))
 
             # Calculating harmonic mean of train_accuracy and test_accuracy
-            model_accuracy = (2*(train_acc+test_acc))/(train_acc+test_acc)
+            model_accuracy = (2*(train_acc*test_acc))/(train_acc+test_acc)
             diff_test_train_acc = abs(test_acc-train_acc)
 
             #logging all important metric
