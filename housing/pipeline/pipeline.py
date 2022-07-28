@@ -124,7 +124,7 @@ class Pipeline(Thread):
                                                                     model_trainer_artifact = model_trainer_artifact) 
 
             if model_evaluation_artifact.is_model_accepted:
-                model_pusher_artifact = self.start_model_pusher(model_eval_artifact=model_evaluation_artifact)
+                model_pusher_artifact = self.start_model_pusher(model_evaluation_artifact=model_evaluation_artifact)
                 logging.info(f'Model pusher artifact: {model_pusher_artifact}')
             else:
                 logging.info(f"Trained Model Rejected")
