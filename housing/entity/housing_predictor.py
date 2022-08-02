@@ -3,7 +3,7 @@ import sys
 
 from housing.exception import HousingException
 from housing.util.util import load_object 
-
+from housing.logger import logging
 import pandas as pd 
 
 class HousingData:
@@ -78,6 +78,7 @@ class HousingPredictor:
         try:
             model_path = self.get_latest_model_path()
             model = load_object(file_path=model_path)
+            logging.info(f"shape of the test data {X}")
             median_house_value = model.predict(X)
             return median_house_value
         except Exception as e:

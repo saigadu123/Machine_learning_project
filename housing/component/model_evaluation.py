@@ -29,7 +29,7 @@ class ModelEvaluation:
         try:
             model = None 
             model_evaluation_file_path = self.model_evaluation_config.model_evaluation_file_path
-
+            
             if not os.path.exists(model_evaluation_file_path):
                 write_yaml_file(file_path=model_evaluation_file_path,)
                 return model 
@@ -83,7 +83,7 @@ class ModelEvaluation:
             # Extracting data
             train_file_path = self.data_ingestion_artifact.train_file_path
             test_file_path = self.data_ingestion_artifact.test_file_path
-
+            
             schema_file_path = self.data_validation_artifact.schema_file_path
 
             train_dataframe = load_data(file_path=train_file_path,schema_file_path=schema_file_path)

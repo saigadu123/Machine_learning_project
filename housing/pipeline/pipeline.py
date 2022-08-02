@@ -80,6 +80,7 @@ class Pipeline(Thread):
                                                 data_validation_artifact = data_validation_artifact,
                                                 model_trainer_artifact=model_trainer_artifact)
             return model_evaluation.initiate_model_evaluation()
+            
         except Exception as e:
             raise HousingException(e,sys) from e 
 
